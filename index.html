@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buscador de anuncios - Conectores Temporales</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 30px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 10px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    pre {
+      background: #e8e8e8;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Buscador de anuncios de Meta</h1>
+    <p>Esta herramienta permite explorar anuncios públicos activos en Facebook/Instagram en Perú para fines de investigación.</p>
+    
+    <label for="query">Término a buscar:</label>
+    <input type="text" id="query" value="nuevo tratamiento" />
+
+    <button onclick="buscar()">Buscar anuncios</button>
+
+    <pre id="resultado">// Aquí aparecerán los resultados de la API</pre>
+  </div>
+
+  <script>
+    async function buscar() {
+      const query = document.getElementById('query').value;
+      const token = 'TU_TOKEN_AQUÍ'; // Reemplázalo por tu token de prueba
+
+      const url = `https://graph.facebook.com/v19.0/ads_archive?access_token=${token}&ad_type=ALL&ad_reached_countries=["PE"]&search_terms=${encodeURIComponent(query)}&fields=ad_creative_body,page_name,ad_snapshot_url`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        document.getElementById('resultado').textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        document.getElementById('resultado').textContent = 'Error al consultar la API';
+      }
+    }
+  </script>
+</body>
+</html>
