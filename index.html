@@ -47,25 +47,51 @@
       overflow-x: auto;
       margin-top: 20px;
     }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+    }
+    .privacy {
+      margin-top: 60px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 0.95em;
+      color: #333;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Buscador de anuncios de Meta</h1>
     <p>Esta herramienta permite explorar anuncios públicos activos en Facebook/Instagram en Perú para fines de investigación.</p>
-    
+
+    <p><a href="#privacidad">🔒 Ver política de privacidad</a></p>
+
     <label for="query">Término a buscar:</label>
     <input type="text" id="query" value="nuevo tratamiento" />
 
     <button onclick="buscar()">Buscar anuncios</button>
 
     <pre id="resultado">// Aquí aparecerán los resultados de la API</pre>
+
+    <div class="footer">
+      © 2025 Conectores Temporales - JOSE LUIS HUACLES UNOCC
+    </div>
+  </div>
+
+  <div class="privacy" id="privacidad">
+    <h2>Política de Privacidad</h2>
+    <p>En Conectores Temporales respetamos la privacidad de los usuarios. Esta herramienta no recopila datos personales ni realiza seguimiento individualizado. Toda la información mostrada proviene de la Biblioteca de Anuncios de Meta (Facebook) y es de carácter público.</p>
+    <p>No almacenamos, vendemos ni compartimos información con terceros. El único propósito de esta herramienta es académico y de investigación, con el fin de analizar el comportamiento de campañas publicitarias en redes sociales dirigidas al público peruano.</p>
+    <p>Para más información, puedes contactarnos en: contacto@joseluishuacles.info</p>
   </div>
 
   <script>
     async function buscar() {
       const query = document.getElementById('query').value;
-      const token = 'TU_TOKEN_AQUÍ'; // Reemplázalo por tu token de prueba
+      const token = 'tokenprueba'; //
 
       const url = `https://graph.facebook.com/v19.0/ads_archive?access_token=${token}&ad_type=ALL&ad_reached_countries=["PE"]&search_terms=${encodeURIComponent(query)}&fields=ad_creative_body,page_name,ad_snapshot_url`;
 
